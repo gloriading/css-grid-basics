@@ -1,0 +1,251 @@
+
+* {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: beige;
+}
+
+main {
+  padding: 50px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px)
+}
+
+a {
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  transition: 0.2s;
+}
+
+a:hover {
+  background-color: salmon;
+}
+
+.container > div {
+  /* Use flex to center text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  text-transform: uppercase;
+  font-size: 2em;
+}
+
+.container > div:nth-child(1n) {
+  background-color: #6495ED;	
+}
+
+.container > div:nth-child(3n) {
+  background-color: #88d8b0;
+}
+
+.container > div:nth-child(2n) {
+  background-color: #ff6f69;
+}
+
+.container > div:nth-child(4n) {
+  background-color: #ffcc5c;
+}
+
+/* 1 */
+/* .container-1 {
+  padding: 100px;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 200px auto 200px;
+  grid-template-rows: 200px 200px;
+} */
+
+/* 2 */
+.container-1 {
+  padding: 100px;
+  display: grid;
+  grid-gap: 1em;
+  /* grid-template-columns: 1fr 2fr 1fr; */
+  /* grid-template-rows: 200px 200px; */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 200px);
+  /* The above 2 lines can be short-handed as: */
+  grid: repeat(2, 250px) / repeat(3, 1fr);
+}
+
+.container-2, .container-6 {
+  height: 100%;
+  padding: 10px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 50px auto 50px;
+}
+.container-2 .header {
+  /*
+  Methods to expand columns /rows:
+  1) Extend from column "line" 1 to line 3
+  grid-column-start: 1;
+  grid-column-end: 3;
+
+  2)
+  grid-column: 1 / 3;
+
+  3)
+  grid-column: 1 / span 2;
+
+  4) expand to the end: -1 means the last column
+  grid-column: 3 / -1;
+  */
+  
+  grid-column: 1 / -1;
+}
+.container-2 .footer {
+  grid-column: 1 / -1;
+}
+.container-2 .sidebar {
+  grid-column: 1 / 3;
+  /* grid-row: 1 / 3; */
+}
+.container-2 .content {
+  grid-column: 3 / -1;
+}
+
+/* Example 3 using grid-area for visual representation */
+.container-3 {
+  height: 100%;
+  padding: 10px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 50px auto 50px;
+  /* areas must be a rectangle */
+  grid-template-areas: 
+    "s s h h h h h h h h h h"
+    "s s c c c c c c c c c c"
+    ". . f f f f f f f f f f";
+}
+
+.container-3 .header {
+  grid-area: h;
+}
+
+.container-3 .sidebar {
+  grid-area: s;
+}
+
+.container-3 .content {
+  grid-area: c;
+}
+
+.container-3 .footer {
+  grid-area: f;
+}
+
+/* More responsive */
+.container-4 {
+  padding: 10px;
+  display: grid;
+  grid-gap: 10px;
+  /*
+  auto-fix that means to fit in as much as possible
+  however there might be some extra space that's less than 100 px
+  "minmax" come to rescue
+
+  grid-template-columns: repeat(auto-fit, 100px);
+  grid-template-rows: repeat(auto-fit, 100px);
+  */
+
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  grid-auto-rows: 80px;
+
+  grid-auto-flow: dense;
+}
+.container-4 > div {
+  font-size: 1.2rem;
+}
+
+.horizontal {
+  grid-column: span 2;
+}
+.vertical {
+  grid-row: span 2;
+}
+.big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.container-5 {
+  margin: 20px;
+  border: 2px solid deeppink;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(2, 100px);
+  justify-content: center;
+  /* space-between space-evenly space-around */
+  align-content: center;
+}
+
+.container-6 .header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.container-6 .header div {
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 1rem;
+}
+.container-6 > .header > div:nth-child(3) {
+  margin-left: auto;
+}
+.container-6 .footer {
+  grid-column: 1 / -1;
+}
+.container-6 .sidebar {
+  grid-column: 1 / 3;
+}
+.container-6 .content {
+  grid-column: 3 / -1;
+}
+
+.container-7 {
+  padding: 10px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 50px auto auto 50px;
+  grid-template-areas: 
+  "header header header header"
+  "sidebar content1 content1 content1"
+  "sidebar content2 content2 content3"
+  "footer footer footer footer";
+}
+.container-7 .header {
+  grid-area: header;
+}
+.container-7 .sidebar {
+  grid-area: sidebar;
+}
+.container-7 .content-1 {
+  grid-area: content1;
+}
+.container-7 .content-2 {
+  grid-area: content2;
+}
+.container-7 .content-3 {
+  grid-area: content3;
+}
+.container-7 .footer {
+  grid-area: footer;
+}
